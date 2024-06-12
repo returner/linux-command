@@ -34,14 +34,14 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ## jenkins 기본포트 변경
 1. jenkins 설정 파일 수정
 ```bash
-sudo vi /etc/sysconfig/jenkins
-```
-```bash
-# Port Jenkins is listening on.
-JENKINS_PORT="8080" # <=여기를 변경
+sudo chmod 777 /usr/lib/systemd/system/jenkins.service
+sudo vi /usr/lib/systemd/system/jenkins.service
+# Environment="JENKINS_PORT=8080" <= 이 부분 수정
+sudo chmod 444 /usr/lib/systemd/system/jenkins/service
 ```
 2. 서비스 재시작
 ```bash
+sudo systemctl daemon-reload
 sudo systemctl restart jenkins
 ```
 3. 방화벽 설정 업데이트
